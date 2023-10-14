@@ -66,28 +66,23 @@ function calculatePrice(info) {
     // get the year
     const year = info.year
     // diffrence = getYearDiffrence(year)
-    const diffrence = function (year) {
-        // Convert to number
-        let
-            persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g],
-            arabicNumbers = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g],
-            fixNumbers = function (str) {
-                if (typeof str === 'string') {
-                    for (var i = 0; i < 10; i++) {
-                        str = str.replace(persianNumbers[i], i).replace(arabicNumbers[i], i);
-                    }
-                }
-                return parseInt(str);
-            };
-
+    function yearDiffrence(year) {
+        const max = CurrentYearrr();
+        const diffrence = max - year;
+        return diffrence;
+      }
+    function CurrentYearrr() {
+        let curentYear = new Date().toLocaleDateString("fa-IR");
+      
+        // Slice date
+        curentYear = curentYear.slice(0, 4);
+      
         // get max year
-        const now = new Date().toLocaleDateString('fa-IR')
-        let nowYear = now.slice(0, 4)
-        let max = fixNumbers(nowYear)
-        year = max - year
-
-        return year
-    }
+        let maxYear = fixNumbers(curentYear);
+        // previous years
+        preYears(maxYear);
+        return maxYear;
+      }
     // 3% cheaper for each year
     price = price - ((diffrence(year) * 3) / 100) * price
 
