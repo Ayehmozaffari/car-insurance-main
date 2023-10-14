@@ -11,11 +11,13 @@ document.addEventListener('submit', submitForm)
 function afterLoad() {
     displayYears()
 }
-// submit form
+
 function submitForm(e) {
     e.preventDefault();
 
-    // read value from the form
+    // read  the value from the form
+
+
     const make = document.querySelector('#make').value
     const year = document.querySelector('#year').value
     const level = document.querySelector('input[name="level"]:checked').value
@@ -24,29 +26,24 @@ function submitForm(e) {
     if (make === "" || year === "" || level === "") {
         displayMsg('لطفا مقدیر فرم را بادقت وارد کنید.')
     } else {
-        // STEP1: get info
+        //  get info
         let insuranceCase = {
             make: make,
             year: year,
             level: level
         }
 
-        // STEP2: calculate
+        //  calculate
         calculatePrice(insuranceCase)
 
-        // STEP3: show result message box
+       // show result message box
     }
 }
 
 function calculatePrice(info) {
     let price = 0, base = 2000000
 
-    // + Calculate Make 
-    /* 
-    make:1      =>      1.15
-    make:2      =>      1.30
-    make:3      =>      1.80
-    */
+ 
     const make = info.make
     switch (make) {
         case "1":
@@ -62,10 +59,10 @@ function calculatePrice(info) {
 
 
 
-    // + Calculate Year
+
     // get the year
     const year = info.year
-    // diffrence = getYearDiffrence(year)
+ 
     const diffrence = function (year) {
         // Convert to number
         let
@@ -88,25 +85,22 @@ function calculatePrice(info) {
 
         return year
     }
-    // 3% cheaper for each year
+    // 3% cheaper for each year(formula)
     price = price - ((diffrence(year) * 3) / 100) * price
 
     console.log(price);
 
 
-    // + get the level
+    //  get the level
     const level = info.level
     price = calculateLevel(level , price)
 }
 
 function calculateLevel(level , price){
-    /*
-        basic   =>  increase 30%
-        complete=>  increase 50%
-    */
+ 
 
     if (level == 'basic'){
-        // price = price + (price * 0.30) (bara mehrdad)
+    
         price = price * 1.3
     }else{
         price = price * 1.5
@@ -116,7 +110,6 @@ function calculateLevel(level , price){
 }
 
 
-// User Interface (UI) Functions
 // Display message box
 function displayMsg(msg) {
     // create message box
@@ -135,7 +128,7 @@ function displayMsg(msg) {
 
 // Show Years
 function displayYears() {
-    // Convert to number
+
     let
         persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g],
         arabicNumbers = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g],
@@ -156,19 +149,17 @@ function displayYears() {
 
     // get max year
     let maxYear = fixNumbers(curentYear)
-
     // get min year
     let minYear = maxYear - 20
-
     // access to the select tag
     const selectYear = document.querySelector('#year')
 
-    // create first option tag for title
-    // create option tag
+    // create  option-1 tag for title
+
     const optionTag = document.createElement('option')
     optionTag.innerText = `- انتخاب -`;
-    // optionTag.value = ''
-    // append option to the selectYear
+    
+    // add option to the selectYear
     selectYear.appendChild(optionTag)
 
     // create for loop for making option tag
