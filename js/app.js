@@ -173,5 +173,3 @@ function displayYears() {
         selectYear.appendChild(optionTag)
     }
 }
-
-
